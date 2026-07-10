@@ -112,3 +112,9 @@ def agregar_paciente(codigo, nombre, especie, raza, edad, sexo, nombre_dueño, c
         pacientes[codigo.upper()] = [nombre, especie, raza, edad, sexo, nombre_dueño]
         expediente[codigo.upper()] = [costo, consultas]
         return True
+def eliminar_paciente(codigo, expediente, pacientes):
+    if buscar_codigo(codigo, expediente):
+        pacientes.pop(codigo)
+        expediente.pop(codigo)
+        return True
+    return False
