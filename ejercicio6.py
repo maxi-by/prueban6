@@ -49,3 +49,66 @@ def busqueda_costo(c_min, c_max, pacientes, expediente):
         resultados.sort()
         for producto in resultados:
             print(f"- {producto}")
+def buscar_codigo(codigo, expediente):
+    for clave in expediente:
+        if clave.upper() == codigo.upper():
+            return True
+    return False
+def actualizar_costo(codigo, nuevo_costo, expediente):
+    codigo = codigo.upper()
+    if buscar_codigo(codigo, expediente):
+        expediente[codigo][0] = nuevo_costo
+        return True
+    return False
+def validar_codigo(codigo):
+    if codigo.strip() != "":
+        return True
+    else:
+        return False
+def validar_nombre(nombre):
+    if nombre.strip() != "":
+        return True
+    else:
+        return False
+def validar_especie(especie):
+    if especie.strip() != "":
+        return True
+    else:
+        return False
+def validar_raza(raza):
+    if raza.strip() != "":
+        return True
+    else:
+        return False
+def validar_edad(edad):
+    if edad.strip() != "":
+        return True
+    else:
+        return False
+def validar_sexo(sexo):
+    if sexo == "macho" or sexo == "hembra":
+        return True
+    else:
+        return False
+def validar_nombre_dueño(nombre_dueño):
+    if nombre_dueño.strip() != "":
+        return True
+    else:
+        return False
+def validar_costo(costo):
+    if costo > 0:
+        return True
+    else:
+        return False
+def validar_consultas(consultas):
+    if consultas >= 0:
+        return True
+    else:
+        return False
+def agregar_paciente(codigo, nombre, especie, raza, edad, sexo, nombre_dueño, costo, consultas, expediente, pacientes):
+    if buscar_codigo(codigo, expediente):
+        return False
+    else:
+        pacientes[codigo.upper()] = [nombre, especie, raza, edad, sexo, nombre_dueño]
+        expediente[codigo.upper()] = [costo, consultas]
+        return True
