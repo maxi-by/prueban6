@@ -71,7 +71,7 @@ def validar_raza(raza):
     else:
         return False
 def validar_edad(edad):
-    if edad.strip() != "":
+    if edad > 0:
         return True
     else:
         return False
@@ -164,9 +164,13 @@ def main():
                 if not validar_raza(raza):
                     print("Error: debe ingresar la raza de la mascota")
                     continue
-                edad = input("Ingrese la edad de la mascota: ")
-                if not validar_edad(edad):
-                    print("Error: Debe ingresar la edad de la mascota")
+                try:
+                    edad = int(input("Ingrese la edad de la mascota: "))
+                    if not validar_edad(edad):
+                        print("Error: Debe ingresar la edad de la mascota")
+                        continue
+                except ValueError:
+                    print("Error: la edad debe ser un numero entero")
                     continue
                 sexo = input("Ingrese el sexo de la mascota: ")
                 if not validar_sexo(sexo):
@@ -179,11 +183,14 @@ def main():
                 try:
                     costo = int(input("Ingrese el costo de antencion: "))
                     consultas = int(input("Ingrese numero de consultas: "))
-                    if validar_costo(costo) and validar_consultas(consultas):
-                        agregar_paciente(codigo, nombre, especie, raza, edad, sexo, nombre_dueño, costo, consultas, expediente, pacientes)
-                        print("Mascota registrada")
-                    else:
-                        print("El código ya existe")
+                    if not validar_costo(costo):
+                        print("Error: Debe ingresar un costo mayor a 0")
+                        continue
+                    if not validar_consultas(consultas):
+                        print("Error: Debe ingresar un numero mayor o igual 0")
+                        continue
+                    agregar_paciente(codigo, nombre, especie, raza, edad, sexo, nombre_dueño, costo, consultas, expediente, pacientes)
+                    print("Mascota registrada")
                 except ValueError:
                     print("Error: El costo debe ser mayor a 0 y la consulta debe ser mayor o igual a 0")
             case 5:
